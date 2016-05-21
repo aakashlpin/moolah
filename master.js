@@ -29,8 +29,8 @@
       amount: Number(amount.value),
       description: description.value,
       payee: payee.value,
-      category: category.value,
-      payer: payer.value,
+      category: category.options[category.selectedIndex].text,
+      payer: payer.options[payer.selectedIndex].text,
     });
 
     [amount, description, payee, category].forEach(function (item) {
