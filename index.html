@@ -19,24 +19,44 @@
 
   <body>
     <h1 class=page-heading>Moolah Tracking</h1>
-    <form>
-      <div class="form-group">
-        <label for="amount">Amount</label>
-        <input type="number" class="form-control" id="amount" placeholder="Amount">
+    <div class=container>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <form id=form-moolah>
+            <div class="form-group">
+              <label for="amount">Amount</label>
+              <input type="number" class="form-control" id="amount" placeholder="e.g. 150">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" class="form-control" id="description" placeholder="e.g. Lunch Salad">
+            </div>
+            <div class="form-group">
+              <label for="payee">Payee</label>
+              <input type="text" class="form-control" id="payee" placeholder="e.g. Freshmenu">
+            </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select class="form-control" id="category">
+                <option value="">Select the category</option>
+                <option value="food">Food</option>
+                <option value="groceries">Groceries</option>
+                <option value="utility-bills">Utility Bills</option>
+                <option value="luxury-dining">Luxury Dine out</option>
+                <option value="online-subscriptions">Internet Subscriptions</option>
+                <option value="fuel">Fuel</option>
+                <option value="rent">Rent</option>
+                <option value="domestic-help">Domestic Help</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="shopping">Shopping</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-default">Save</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="description" placeholder="Description">
-      </div>
-      <div class="form-group">
-        <label for="payee">Payee</label>
-        <input type="text" class="form-control" id="payee" placeholder="Payee">
-      </div>
-      <div class="form-group">
-        <label for="category">Category</label>
-        <input type="text" class="form-control" id="category" placeholder="Category">
-      </div>
-      <button type="submit" class="btn btn-default">Save</button>
-    </form>
+    </div>
+
+    <script src="master.js"></script>
   </body>
 </html>
