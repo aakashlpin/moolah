@@ -3,7 +3,21 @@
       amount = document.querySelector('#amount'),
       description = document.querySelector('#description'),
       payee = document.querySelector('#payee'),
-      category = document.querySelector('#category');
+      category = document.querySelector('#category'),
+      payer = document.querySelector('#payer');
+
+  function getUrlParameterByName (name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
+        results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  }
+
+  var defaultPayer = getUrlParameterByName('payer');
+
+  if (defaultPayer) {
+    payer.value = defaultPayer;
+  }
 
   function submitMoolah (e) {
     e.preventDefault();
@@ -16,6 +30,7 @@
       description: description.value,
       payee: payee.value,
       category: category.value,
+      payer: payer.value,
     });
 
     [amount, description, payee, category].forEach(function (item) {
