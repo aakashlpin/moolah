@@ -7,9 +7,6 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="master.css" media="screen" title="no title" charset="utf-8">
 
     <!-- start Mixpanel -->
@@ -22,5 +19,24 @@
 
   <body>
     <h1 class=page-heading>Moolah Tracking</h1>
+    <form>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" class="form-control" id="amount" placeholder="Amount">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" placeholder="Description">
+      </div>
+      <div class="form-group">
+        <label for="payee">Payee</label>
+        <input type="text" class="form-control" id="payee" placeholder="Payee">
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" class="form-control" id="category" placeholder="Category">
+      </div>
+      <button type="submit" class="btn btn-default">Save</button>
+    </form>
   </body>
 </html>
