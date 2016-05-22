@@ -28,6 +28,14 @@
     })
   }
 
+  function hideLoader() {
+    document.querySelector('#loading-container').style.display = 'none';
+  }
+
+  function showMixpanelContainer() {
+    document.querySelector('#mixpanel-token-container').style.display = 'block';
+  }
+
   // FirebaseUI config.
   var uiConfig = {
    'signInSuccessUrl': location.href,
@@ -52,13 +60,15 @@
         var providerData = user.providerData;
         user.getToken().then(function(accessToken) {
           userRegistrationExists(uid, function(user) {
+            hideLoader();
             if (user) {
               if (!user.mixpanelToken) {
                 // show an input box to accept a mixpanel token
-                document.querySelector('#mixpanel-token-container').style.display = 'block';
+                showMixpanelContainer();
               } else {
                 // all good. associate mixpanel
                 mixpanel.init(user.mixpanelToken);
+                document.querySelector('#moolah-container').style.display = 'block';
               }
             } else {
               registerUser(uid, {
@@ -68,7 +78,8 @@
                 photoURL: photoURL,
                 providerData: providerData,
                 accessToken: accessToken
-              })
+              });
+              showMixpanelContainer();
             }
           })
 
