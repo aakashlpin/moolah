@@ -16,7 +16,7 @@
   }
 
   function associateMixpanelWithUser(userId, data) {
-    database.ref('users/' + userId).update(data)
+    return database.ref('users/' + userId).update(data)
   }
 
   function userRegistrationExists(userId, cb) {
@@ -34,8 +34,22 @@
     document.querySelector('#mixpanel-token-container').style.display = 'block';
   }
 
-  function showMoolahContainer() {
+  function initViz (secret) {
+    MP.api.setCredentials(secret);
+
+    $.ajax({
+      dataType: "jsonp",
+      url: 'https://'+ secret + '@mixpanel.com/api/2.0/segmentation/multiseg?event=Expense&type=general&limit=150&inner=number(properties%5B%22amount%22%5D)&outer=properties%5B%22category%22%5D&action=sum&unit=day&buckets=12&allow_more_buckets=false',
+      success: function (response) {
+        $('#chart').MPChart({chartType: 'pie', data: response.data.values});
+        $('#table').MPTable({data: response.data.values});
+      }
+    })
+  }
+
+  function showMoolahContainer(secret) {
     document.querySelector('#moolah-container').style.display = 'block';
+    initViz(secret);
   }
 
   // FirebaseUI config.
@@ -77,7 +91,7 @@
               } else {
                 // all good. associate mixpanel
                 mixpanel.init(user.mixpanelToken);
-                showMoolahContainer();
+                showMoolahContainer(user.mixpanelSecret);
               }
             } else {
               registerUser(uid, {
@@ -122,11 +136,9 @@
     if (secret.length === 32) {
       updateWith.mixpanelSecret = secret;
     }
-    associateMixpanelWithUser(firebase.auth().currentUser.uid, updateWith);
-    if (Object.keys(updateWith).length === 2) {
-      document.querySelector('#mixpanel-token-container').style.display = 'none';
-      showMoolahContainer();
-    }
+    associateMixpanelWithUser(firebase.auth().currentUser.uid, updateWith).then(function () {
+      location.reload();
+    })
   })
 
 })();
