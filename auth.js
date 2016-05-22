@@ -1,4 +1,4 @@
-(function () {
+(function (App) {
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAgBLwiI_u2tVE8p1mpkezNRCAK1vsO0t8",
@@ -34,22 +34,9 @@
     document.querySelector('#mixpanel-token-container').style.display = 'block';
   }
 
-  function initViz (secret) {
-    MP.api.setCredentials(secret);
-
-    $.ajax({
-      dataType: "jsonp",
-      url: 'https://'+ secret + '@mixpanel.com/api/2.0/segmentation/multiseg?event=Expense&type=general&limit=150&inner=number(properties%5B%22amount%22%5D)&outer=properties%5B%22category%22%5D&action=sum&unit=day&buckets=12&allow_more_buckets=false',
-      success: function (response) {
-        $('#chart').MPChart({chartType: 'pie', data: response.data.values});
-        $('#table').MPTable({data: response.data.values});
-      }
-    })
-  }
-
-  function showMoolahContainer(secret) {
+  function showMoolahContainer() {
     document.querySelector('#moolah-container').style.display = 'block';
-    initViz(secret);
+    App.viz.draw();
   }
 
   // FirebaseUI config.
@@ -141,4 +128,4 @@
     })
   })
 
-})();
+})(App);

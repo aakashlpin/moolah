@@ -1,4 +1,4 @@
-(function () {
+(function (App) {
   var form = document.querySelector('#form-moolah'),
       amount = document.querySelector('#amount'),
       description = document.querySelector('#description'),
@@ -26,8 +26,13 @@
       [amount, description, payee, category].forEach(function (item) {
         item.value = '';
       })
+
+      setTimeout(function () {
+        // redraw after 10 secs to get fresh data from api
+        App.viz.draw();
+      }, 10000);
     });
   }
 
   form.addEventListener('submit', submitMoolah);
-})();
+})(App);

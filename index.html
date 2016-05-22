@@ -62,7 +62,7 @@
 
     <div class=container id=moolah-container style="display: none;">
       <div class="row">
-        <div class="col-sm-12 col-md-8 col-lg-6">
+        <div class="col-sm-12 col-md-4 col-lg-6">
           <form id=form-moolah>
             <div class="form-group">
               <label for="amount">Amount</label>
@@ -99,9 +99,13 @@
           </form>
         </div>
 
-        <div class="col-sm-12 col-md-4 col-lg-6">
-          <div id="chart"></div>
-          <div id="table"></div>
+        <div class="col-sm-12 col-md-8 col-lg-6">
+          <div id="chart">
+            <div class="content"></div>
+          </div>
+          <div id="table">
+            <div class="content"></div>
+          </div>
         </div>
 
       </div>
@@ -112,6 +116,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
+    <script>
+      var App = {};
+    </script>
+    <script src="viz.js"></script>
     <script src="auth.js"></script>
     <script src="master.js"></script>
   </body>
