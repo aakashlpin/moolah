@@ -36,6 +36,10 @@
     document.querySelector('#mixpanel-token-container').style.display = 'block';
   }
 
+  function showMoolahContainer() {
+    document.querySelector('#moolah-container').style.display = 'block';
+  }
+
   // FirebaseUI config.
   var uiConfig = {
    'signInSuccessUrl': location.href,
@@ -68,7 +72,7 @@
               } else {
                 // all good. associate mixpanel
                 mixpanel.init(user.mixpanelToken);
-                document.querySelector('#moolah-container').style.display = 'block';
+                showMoolahContainer();
               }
             } else {
               registerUser(uid, {
@@ -108,6 +112,7 @@
       associateMixpanelWithUser(firebase.auth().currentUser.uid, token);
       mixpanel.init(token);
       document.querySelector('#mixpanel-token-container').style.display = 'none';
+      showMoolahContainer();
     }
   })
 
