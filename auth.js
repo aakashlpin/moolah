@@ -15,10 +15,8 @@
     database.ref('users/' + userId).set(data);
   }
 
-  function associateMixpanelWithUser(userId, mixpanelToken) {
-    database.ref('users/' + userId).update({
-      mixpanelToken: mixpanelToken
-    })
+  function associateMixpanelWithUser(userId, data) {
+    database.ref('users/' + userId).update(data)
   }
 
   function userRegistrationExists(userId, cb) {
@@ -66,9 +64,16 @@
           userRegistrationExists(uid, function(user) {
             hideLoader();
             if (user) {
-              if (!user.mixpanelToken) {
+              if (!user.mixpanelToken || !user.mixpanelSecret) {
                 // show an input box to accept a mixpanel token
+                if (user.mixpanelToken) {
+                  document.querySelector('#token').value = user.mixpanelToken;
+                }
+                if (user.mixpanelSecret) {
+                  document.querySelector('#secret').value = user.mixpanelSecret;
+                }
                 showMixpanelContainer();
+
               } else {
                 // all good. associate mixpanel
                 mixpanel.init(user.mixpanelToken);
@@ -108,9 +113,17 @@
   mixpanelForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var token = document.querySelector('#token').value.trim();
+    var secret = document.querySelector('#secret').value.trim();
+    var updateWith = {};
     if (token.length === 32) {
-      associateMixpanelWithUser(firebase.auth().currentUser.uid, token);
+      updateWith.mixpanelToken = token;
       mixpanel.init(token);
+    }
+    if (secret.length === 32) {
+      updateWith.mixpanelSecret = secret;
+    }
+    associateMixpanelWithUser(firebase.auth().currentUser.uid, updateWith);
+    if (Object.keys(updateWith).length === 2) {
       document.querySelector('#mixpanel-token-container').style.display = 'none';
       showMoolahContainer();
     }
