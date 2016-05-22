@@ -85,6 +85,7 @@
 
         });
       } else {
+        hideLoader();
         // User is signed out.
         var ui = new firebaseui.auth.AuthUI(auth);
         // The start method will wait until the DOM is loaded.
